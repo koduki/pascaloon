@@ -5,10 +5,10 @@
 <declist> --> var (<ident> : <type>;) +
 <statlist> --> <statement>(; <statement>)*
 <statement> --> <funccall>
-	        <ident> :=  <expression>
-		<if> <relation> then <statment> else <statement>
-		<while> <relation> do <statment> end
-		<block>
+                <ident> :=  <expression>
+                <if> <relation> then <statment> else <statement>
+                <while> <relation> do <statment> end
+                <block>
 <block> --> begin <statlist> end
 <relation> --> <expression> <rel_op> <expression>
 <rel_op> --> > | < | = | <>| <= | >= |
