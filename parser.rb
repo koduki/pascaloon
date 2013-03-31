@@ -1,4 +1,4 @@
-require "scanner.rb"
+require "./scanner.rb"
 
 class ParseException < Exception;end
 
@@ -96,14 +96,19 @@ class Parser
     if match?(:IDENT)
       ident = b_ident
       case
-      when match?(:OPEN) : b_funccall ident
-      when match?(:ASSIGN) : b_assign ident
+      when match?(:OPEN) 
+        b_funccall ident
+      when match?(:ASSIGN) 
+        b_assign ident
       end
     else
       case
-      when match?(:BEGIN) : b_block
-      when match?(:IF) : b_if
-      when match?(:WHILE) : b_while
+      when match?(:BEGIN) 
+        b_block
+      when match?(:IF) 
+        b_if
+      when match?(:WHILE)
+        b_while
       end
     end
   end
@@ -140,10 +145,14 @@ class Parser
 
   def b_literal
     case
-    when match?(:IDENT) : b_ident      
-    when match?(:String): b_string
-    when match?(:Integer): b_number
-    when match?(:ADD_OP): [take(:ADD_OP), b_number]
+    when match?(:IDENT) 
+      b_ident      
+    when match?(:String)
+      b_string
+    when match?(:Integer)
+      b_number
+    when match?(:ADD_OP)
+      [take(:ADD_OP), b_number]
     else
       Token.new(:NIL, nil)
     end
@@ -168,8 +177,10 @@ class Parser
     exp = b_term
     while match?(:ADD_OP)
       exp = case take(:ADD_OP).value
-            when '+' : [Token.new(:add, "add"), exp, b_term]
-            when '-' : [Token.new(:sub, "sub"), exp, b_term]
+            when '+' 
+              [Token.new(:add, "add"), exp, b_term]
+            when '-' 
+              [Token.new(:sub, "sub"), exp, b_term]
             end
     end
     exp
@@ -179,9 +190,12 @@ class Parser
     term = b_fuctor
     while match?(:MUL_OP)
       term = case take(:MUL_OP).value
-             when '*' : [Token.new(:mul, "mul"), term, b_fuctor]
-             when '/' : [Token.new(:div, "div"), term, b_fuctor]
-             when '%' : [Token.new(:mod, "mod"), term, b_fuctor]               
+             when '*' 
+              [Token.new(:mul, "mul"), term, b_fuctor]
+             when '/' 
+              [Token.new(:div, "div"), term, b_fuctor]
+             when '%' 
+              [Token.new(:mod, "mod"), term, b_fuctor]               
              end
     end
     term

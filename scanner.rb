@@ -25,37 +25,68 @@ end
 
 def Token value
     case value 
-    when 'program' : Token.new(:PROGRAM, value)
-    when 'function' : Token.new(:FUNCTION, value)      
-    when 'var' : Token.new(:VAR, value)      
-    when 'begin' : Token.new(:BEGIN, value)
-    when 'end' : Token.new(:END, value)
-    when 'if' : Token.new(:IF, value)
-    when 'then' : Token.new(:THEN, value)
-    when 'else' : Token.new(:ELSE, value)
-    when 'while' : Token.new(:WHILE, value)
-    when 'do' : Token.new(:DO, value)
-    when '(' : Token.new(:OPEN, value)
-    when ')' : Token.new(:CLOSE, value)
-    when ':' : Token.new(:COLON, value)      
-    when ';' : Token.new(:SEMICOLON, value)
-    when '.' : Token.new(:DOT, value)
-    when ',' : Token.new(:COMMA, value)
-    when ':=': Token.new(:ASSIGN, value)
-    when '=' : Token.new(:REL_OP, value)
-    when '>=' : Token.new(:REL_OP, value)
-    when '<=' : Token.new(:REL_OP, value)
-    when '<' : Token.new(:REL_OP, value)
-    when '>' : Token.new(:REL_OP, value)
-    when '<>' : Token.new(:REL_OP, value)            
-    when '+' : Token.new(:ADD_OP, value)
-    when '-' : Token.new(:ADD_OP, value)
-    when '*' : Token.new(:MUL_OP, value)
-    when '/' : Token.new(:MUL_OP, value)
-    when '%' : Token.new(:MUL_OP, value)
-    when /'.*'/ : Token.new(:String, value.slice(1, value.size - 2))
-    when /\D\W*/ : Token.new(:IDENT, value)
-    when /\d/ : Token.new(:Integer, value.to_i)        
+    when 'program' 
+        Token.new(:PROGRAM, value)
+    when 'function'
+        Token.new(:FUNCTION, value)      
+    when 'var'
+        Token.new(:VAR, value)      
+    when 'begin'
+        Token.new(:BEGIN, value)
+    when 'end'
+        Token.new(:END, value)
+    when 'if'
+        Token.new(:IF, value)
+    when 'then'
+        Token.new(:THEN, value)
+    when 'else'
+        Token.new(:ELSE, value)
+    when 'while'
+        Token.new(:WHILE, value)
+    when 'do'
+        Token.new(:DO, value)
+    when '('
+        Token.new(:OPEN, value)
+    when ')'
+        Token.new(:CLOSE, value)
+    when ':'
+        Token.new(:COLON, value)      
+    when ';'
+        Token.new(:SEMICOLON, value)
+    when '.'
+        Token.new(:DOT, value)
+    when ','
+        Token.new(:COMMA, value)
+    when ':='
+        Token.new(:ASSIGN, value)
+    when '='
+        Token.new(:REL_OP, value)
+    when '>='
+        Token.new(:REL_OP, value)
+    when '<='
+        Token.new(:REL_OP, value)
+    when '<'
+        Token.new(:REL_OP, value)
+    when '>'
+        Token.new(:REL_OP, value)
+    when '<>'
+        Token.new(:REL_OP, value)            
+    when '+'
+        Token.new(:ADD_OP, value)
+    when '-'
+        Token.new(:ADD_OP, value)
+    when '*'
+        Token.new(:MUL_OP, value)
+    when '/'
+        Token.new(:MUL_OP, value)
+    when '%'
+        Token.new(:MUL_OP, value)
+    when /'.*'/
+        Token.new(:String, value.slice(1, value.size - 2))
+    when /\D\W*/
+        Token.new(:IDENT, value)
+    when /\d/
+        Token.new(:Integer, value.to_i)        
     else
       Token.new(:UNDEFINE, value)
     end
@@ -91,15 +122,20 @@ class Scanner
           break if (y = _next[]) == "'"
         end
         x += y
-      when /\s/ : _next_word[]
+      when /\s/ 
+          _next_word[]
       when /\W/
         if _has_next[]
           y = _next[] 
           case
-          when (x == ':' and y == '=') : x += y
-          when (x == '>' and y == '=') : x += y 
-          when (x == '<' and y == '=') : x += y
-          when (x == '<' and y == '>') : x += y                     
+          when (x == ':' and y == '=')
+             x += y
+          when (x == '>' and y == '=')
+             x += y 
+          when (x == '<' and y == '=')
+             x += y
+          when (x == '<' and y == '>')
+             x += y                     
           else
             idx -= 1
             x

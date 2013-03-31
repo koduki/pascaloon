@@ -1,4 +1,4 @@
-require 'evaluator.rb'
+require './evaluator.rb'
 
 #
 # Commandline Interface

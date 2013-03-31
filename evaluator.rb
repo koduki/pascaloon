@@ -1,5 +1,5 @@
-require 'parser.rb'
-require 'utils.rb'
+require './parser.rb'
+require './utils.rb'
 
 class SemanticException < Exception; end
 
@@ -51,8 +51,10 @@ class Evaluator
   
   def get_type type
     case type
-    when "String" : Token.new(:String, nil)
-    when "Integer" : Token.new(:Integer, nil)
+    when "String"  
+      Token.new(:String, nil)
+    when "Integer" 
+      Token.new(:Integer, nil)
     end
   end
   
@@ -82,9 +84,12 @@ class Evaluator
   def eval_statlist tree, env
     tree.each do |statement|
       case statement[0].type
-      when :IF : eval_if statement, env
-      when :WHILE : eval_while statement, env
-      when :BEGIN : eval_statlist statement[1], env
+      when :IF 
+        eval_if statement, env
+      when :WHILE 
+        eval_while statement, env
+      when :BEGIN 
+        eval_statlist statement[1], env
       else
         call_func(statement, env)
       end

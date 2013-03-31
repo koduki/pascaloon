@@ -1,4 +1,4 @@
-require "utils.rb"
+require "./utils.rb"
 
 class SemanticAnalzer
 
